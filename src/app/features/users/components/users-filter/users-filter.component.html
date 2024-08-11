@@ -1,0 +1,35 @@
+<form [formGroup]="filterForm" (ngSubmit)="onFilter()" class="filter-form">
+	<mat-form-field>
+		<mat-label>Дата регистрации от</mat-label>
+		<input matInput [matDatepicker]="picker1" formControlName="dateFrom" [max]="maxDate" (dateChange)="onDateFromChange()">
+		<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+		<mat-datepicker #picker1></mat-datepicker>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Дата регистрации до</mat-label>
+		<input matInput [matDatepicker]="picker2" formControlName="dateTo" [matDatepickerFilter]="dateToFilter">
+		<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+		<mat-datepicker #picker2></mat-datepicker>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Возраст от</mat-label>
+		<input matInput type="number" formControlName="ageFrom" (input)="onAgeFromChange()">
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Возраст до</mat-label>
+		<input matInput type="number" formControlName="ageTo" [min]="minAgeTo">
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>ФИО</mat-label>
+		<input matInput formControlName="fullName">
+	</mat-form-field>
+
+	<div class="filter-actions">
+		<button mat-button type="button" (click)="onClear()">Очистить</button>
+		<button mat-raised-button color="primary" type="submit">Найти</button>
+	</div>
+</form>

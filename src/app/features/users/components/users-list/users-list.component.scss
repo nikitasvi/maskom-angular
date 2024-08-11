@@ -1,0 +1,42 @@
+.user-list-container {
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	max-height: 100vh;
+}
+
+.user-list-filter {
+	margin: 20px;
+}
+
+.user-list {
+	margin: 20px;
+}
+
+.user-list-actions {
+	margin-bottom: 20px;
+}
+
+.user-list-table {
+	max-height: calc(100vh - 126px);
+	overflow: auto;
+}
+
+.mat-mdc-table {
+	width: 100%;
+}
+
+.mat-header-row {
+	position: sticky;
+	top: 0;
+	background: white;
+	z-index: 1;
+}
+
+.mat-header-cell {
+	font-weight: bold;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+	cursor: pointer;
+}

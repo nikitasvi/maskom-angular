@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AddUserDialogComponent } from './components/add-user-dialog/add-user-dialog.component';
 import { EditUserDialogComponent } from './components/edit-user-dialog/edit-user-dialog.component';
 import { SharedModule } from "src/app/shared/shared.module";
+import { RouteReuseStrategy } from "@angular/router";
+import { CustomReuseStrategy } from "./custom-reuse.strategy";
 
 @NgModule( {
 	imports: [
@@ -18,6 +20,9 @@ import { SharedModule } from "src/app/shared/shared.module";
 		UsersRoutingModule,
 		ReactiveFormsModule,
 		AngularMaterialModule,
+	],
+	providers: [
+		{ provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
 	],
 	declarations: [
 		UsersListComponent,

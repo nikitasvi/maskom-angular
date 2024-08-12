@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.co
 	templateUrl: './users-details.component.html',
 	styleUrls: ['./users-details.component.scss']
 })
-export class UsersDetailsComponent implements OnInit {
+export class UsersDetailsComponent implements OnInit, OnDestroy {
 	private userService = inject(UserService);
 	private dialog = inject(MatDialog);
 	private activatedRoute = inject(ActivatedRoute);
@@ -20,6 +20,8 @@ export class UsersDetailsComponent implements OnInit {
 	public user$!: Observable<any>;
 
 	public ngOnInit(): void {
+		console.log('Init');
+		
 		this.activatedRoute.params.subscribe(params => {
 			this.selectedUser = +params['id'];
 			this.onUserChange(this.selectedUser);
@@ -32,6 +34,11 @@ export class UsersDetailsComponent implements OnInit {
 				this.onUserChange(this.selectedUser);
 			}
 		});
+	}
+
+	public ngOnDestroy(): void {
+		// если лог не срабатывает значит routeReuseStrategy отрабатывает
+		console.log('Destroy');	
 	}
 
 	public onUserChange(userId: number): void {

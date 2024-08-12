@@ -14,12 +14,6 @@
   git clone https://github.com/nikitasvi/maskom-angular
 ~~~
 
-Go to the project directory  
-
-~~~bash  
-  cd my-project
-~~~
-
 Установить зависимости  
 
 ~~~bash  

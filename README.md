@@ -4,7 +4,7 @@
 Использовал Angular Material и RouteReuseStrategy.
 
 - Angular v16
-- Anglular Material v16
+- Angular Material v16
 
 ## Как запустить  
 

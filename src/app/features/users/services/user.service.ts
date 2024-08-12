@@ -51,8 +51,8 @@ export class UserService {
 	}
 
 	public getCurrentUser(): Observable<User | null> {
-    return this.currentUser$;
-  }
+		return this.currentUser$;
+	}
 
 	public getUserById(id: number): Observable<User | undefined> {
 		return this.users$.pipe(
@@ -80,23 +80,23 @@ export class UserService {
 	}
 
 	public login(username: string, password: string): boolean {
-    const users = this.usersSubject.getValue();
-    const user = users.find((u) => u.username === username && u.password === password);
-    
-    if (user) {
-      this.currentUserSubject.next(user);
-      return true;
-    }
-    return false;
-  }
+		const users = this.usersSubject.getValue();
+		const user = users.find((u) => u.username === username && u.password === password);
+
+		if (user) {
+			this.currentUserSubject.next(user);
+			return true;
+		}
+		return false;
+	}
 
 	public logout(): void {
-    this.currentUserSubject.next(null);
-  }
+		this.currentUserSubject.next(null);
+	}
 
 	public isLoggedIn(): boolean {
-    return this.currentUserSubject.getValue() !== null;
-  }
+		return this.currentUserSubject.getValue() !== null;
+	}
 }
 
 export const TestUserData = [

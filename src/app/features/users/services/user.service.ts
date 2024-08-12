@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { IUser, User } from '../models/user.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -53,6 +53,31 @@ export class UserService {
 	public getCurrentUser(): Observable<User | null> {
     return this.currentUser$;
   }
+
+	public getUserById(id: number): Observable<User | undefined> {
+		return this.users$.pipe(
+			map(users => users.find(user => user.id === id))
+		);
+	}
+
+	public addUser(user: any): void {
+		const users = this.usersSubject.getValue();
+		user.id = users.length + 1;
+		// user.registrationDate = new Date();
+		this.usersSubject.next([...users, user]);
+		this.localeStorageService.setItem(this.localeStorageKey, [...users, user]);
+	}
+	
+
+	public updateUser(id: number, updatedUser: User): void {
+		const users = this.usersSubject.getValue();
+		const index = users.findIndex(u => u.id === id);
+		if (index !== -1) {
+			users[index] = { ...users[index], ...updatedUser };
+			this.localeStorageService.setItem(this.localeStorageKey, users);
+			this.usersSubject.next([...users]);
+		}
+	}
 
 	public login(username: string, password: string): boolean {
     const users = this.usersSubject.getValue();

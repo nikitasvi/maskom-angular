@@ -5,7 +5,7 @@
 
 	<div class="user-list">
 		<div class="user-list-actions">
-			<button mat-raised-button color="primary">Добавить пользователя</button>
+			<button mat-raised-button color="primary" (click)="openAddUserDialog()">Добавить пользователя</button>
 		</div>
 		<div class="user-list-table">
 			<table mat-table [dataSource]="filteredUsers" class="mat-elevation-z8">

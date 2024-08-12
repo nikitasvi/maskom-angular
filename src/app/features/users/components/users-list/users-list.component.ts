@@ -2,6 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 
 @Component({
 	selector: 'app-users-list',
@@ -10,6 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class UsersListComponent implements OnInit {
 	private userService = inject(UserService);
+	private dialog = inject(MatDialog);
+	private router = inject(Router);
 
 	public displayedColumns: string[] = ['index', 'fullName', 'age', 'registrationDate'];
 	public users$!: Observable<User[]>;
@@ -23,10 +28,27 @@ export class UsersListComponent implements OnInit {
 	}
 
 	public openUserDetails(user: User): void {
-		console.log('user', user);	
+		this.router.navigate(['/users', user.id]);
 	}
 
-	public applyFilter(filter: any) {
+	public openAddUserDialog(): void {
+		let newUserId = 0;
+
+		this.users$.subscribe(users => newUserId = users.length + 1);
+		const dialogRef = this.dialog.open(AddUserDialogComponent, {
+			width: '500px',
+			height: '790px',
+			data: { id: newUserId }
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				this.userService.addUser(result);
+			}
+		});
+	}
+
+	public applyFilter(filter: any): void {
 		this.users$.subscribe(users => {
 			this.filteredUsers = users.filter(user => {
 				const matchesDate = (!filter.dateFrom || new Date(user.registrationDate) >= filter.dateFrom)

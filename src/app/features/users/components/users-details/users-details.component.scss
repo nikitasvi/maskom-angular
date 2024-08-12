@@ -1,0 +1,14 @@
+.user-details-container {
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr 4fr;
+	column-gap: 20px;
+}
+
+.user-details-selector {
+	display: block;
+}
+
+button {
+	margin-bottom: 20px;
+}

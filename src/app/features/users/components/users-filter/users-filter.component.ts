@@ -2,20 +2,20 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-users-filter',
-  templateUrl: './users-filter.component.html',
-  styleUrls: ['./users-filter.component.scss']
+	selector: 'app-users-filter',
+	templateUrl: './users-filter.component.html',
+	styleUrls: ['./users-filter.component.scss']
 })
 export class UsersFilterComponent {
-  private formBuilder: FormBuilder = inject(FormBuilder);
+	private formBuilder: FormBuilder = inject(FormBuilder);
 
-  @Output() filter = new EventEmitter<any>();
+	@Output() filter = new EventEmitter<any>();
 
-  public filterForm: FormGroup;
+	public filterForm: FormGroup;
 	public maxDate: Date = new Date();
 	public minAgeTo: number | null = null;
 
-  constructor() {
+	constructor() {
 		this.filterForm = this.formBuilder.group({
 			dateFrom: null,
 			dateTo: null,
@@ -25,7 +25,7 @@ export class UsersFilterComponent {
 		});
 	}
 
-  public onFilter() {
+	public onFilter(): void {
 		const { dateFrom, dateTo, ageFrom, ageTo } = this.filterForm.value;
 
 		if (dateFrom && dateTo && dateFrom > dateTo) {
@@ -39,12 +39,12 @@ export class UsersFilterComponent {
 		this.filter.emit(this.filterForm.value);
 	}
 
-  public onClear() {
+	public onClear(): void {
 		this.filterForm.reset();
 		this.filter.emit(this.filterForm.value);
 	}
 
-  public onAgeFromChange() {
+	public onAgeFromChange(): void {
 		const ageFrom = this.filterForm.get('ageFrom')?.value;
 		
 		if (ageFrom !== null) {
@@ -59,7 +59,7 @@ export class UsersFilterComponent {
 		}
 	}
 
-	public onDateFromChange() {
+	public onDateFromChange(): void {
 		const dateFrom = this.filterForm.get('dateFrom')?.value;
 		if (dateFrom) {
 			this.filterForm.get('dateTo')?.setValue(null);

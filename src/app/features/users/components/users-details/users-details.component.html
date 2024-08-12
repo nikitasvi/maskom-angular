@@ -1,1 +1,20 @@
-<p>users-details works!</p>
+<div class="user-details-container">
+	<mat-form-field class="user-details-selector">
+		<mat-label>Выберите пользователя</mat-label>
+		<mat-select [(value)]="selectedUser" (selectionChange)="onUserChange($event.value)">
+			<mat-option *ngFor="let user of users$ | async" [value]="user.id">{{user.fullName}}</mat-option>
+		</mat-select>
+	</mat-form-field>
+	
+	<div *ngIf="user$ | async as user" class="user-details">
+		<div class="user-details-actions">
+			<button mat-raised-button color="primary" (click)="openEditModal(user)">Редактировать пользователя</button>
+		</div>
+		<div class="user-details-info">
+			<p><strong>ФИО:</strong> {{user.fullName}}</p>
+			<p><strong>Возраст:</strong> {{user.age}}</p>
+			<p><strong>Логин:</strong> {{user.username}}</p>
+			<p><strong>Дата регистрации:</strong> {{user.registrationDate | date:'shortDate'}}</p>
+		</div>
+	</div>
+</div>

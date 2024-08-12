@@ -6,19 +6,25 @@ import { UsersRoutingModule } from "./users-routing.module";
 import { AngularMaterialModule } from "src/app/shared/modules/angular-material.module";
 import { UsersFilterComponent } from './components/users-filter/users-filter.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AddUserDialogComponent } from './components/add-user-dialog/add-user-dialog.component';
+import { EditUserDialogComponent } from './components/edit-user-dialog/edit-user-dialog.component';
+import { SharedModule } from "src/app/shared/shared.module";
 
 @NgModule( {
 	imports: [
-		CommonModule,
-		UsersRoutingModule,
-		AngularMaterialModule,
 		FormsModule,
-		ReactiveFormsModule
+		CommonModule,
+		SharedModule,
+		UsersRoutingModule,
+		ReactiveFormsModule,
+		AngularMaterialModule,
 	],
 	declarations: [
 		UsersListComponent,
 		UsersDetailsComponent,
-		UsersFilterComponent
+		UsersFilterComponent,
+		AddUserDialogComponent,
+		EditUserDialogComponent
 	]
 })
 

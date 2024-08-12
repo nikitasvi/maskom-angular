@@ -1,0 +1,19 @@
+.edit-user-container {
+	margin: 20px;
+	position: relative;
+	height: calc(100% - 40px);
+}
+
+mat-form-field {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.edit-user-actions {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
